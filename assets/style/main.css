@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&family=Tajawal:wght@200;300;400;500;600;700;800;900&display=swap');
+:root{
+    /* Grids */
+    --main-grid: repeat(auto-fill, minmax(200px, 1fr));
+    --second-grid: repeat(auto-fill, minmax(280px, 1fr));
+    --third-grid: repeat(auto-fill, minmax(120px, 1fr));
+
+    /* Font Sizes */
+    --fsize10: 10.24px;
+    --fsize12: 12.8px;
+    --fsize14: 14px;
+    --fsize16: 16px;
+    --fsize18: 18px;
+    --fsize20: 20px;
+    --fsize25: 25px;
+    --fsize31: 31.25px;
+    --fsize39: 39.0.6px;
+    --fsize48: 48.83px;
+
+    /* Colors */
+    --bDarkbg: #090a0e;
+    --lbDarkbg: #1c1c1c;
+    --blackblue: #10171f;
+    --blackgreen: #0f1712;
+    --bLightbg: #2f353e;
+    --bgliDark: #151515;
+    
+    --whiteBg: #fff;
+    --graybg: #eeeeee;
+    --greenLL: #e1ece4;
+    
+    --graySh: #f6f5f8;
+    --gray10: #fbfbfb;
+    --gray20: #eaf7fb;
+    --gray30: #f8fafb;
+    --gray40: #e3e3e3;
+    --gray50: #97a4b4;
+    --gray90: #455362;
+   
+    --blueL: #10bcf6;
+    --blueD: #156688;
+    --blueP: #1977f2;
+    --blueH: #5e7dfd;
+
+    --orange: #ff823f;
+    --pink: #ffa7a7;
+    --pinkD: #d69cb2;
+    --pinkH: #f56082;
+    --pinkP: #748193;
+
+    --green: #d0ead7;
+    --greenL: #42b892;
+    --gLightbg: #00aa91;
+    --gLightbgD: #006556;
+    --gLightbgL: #00d3b4;
+
+
+    --yellowTr: #f9da7e40;
+    --yellow10: #fdc211;
+    --yellow20: #fdb717;
+    --yellow30: #fbab16;
+    --yellow40: #fb9817;
+    --yellow50: #f7881d;
+    --yellow60: #f5671f;
+    --yellow70: #f55227;
+    --yellow80: #ee4c1e;
+    --yellow90: #f54627;
+    --gold: #faa226;
+    --gradientY19: linear-gradient(to right, var(--yellow10), var(--yellow90));
+    --gradientY19D: linear-gradient(to bottom, var(--yellow10), var(--yellow90));
+    --gradientY16: linear-gradient(to right, var(--yellow10), var(--yellow60));
+    --gradientY16D: linear-gradient(to bottom, var(--yellow10), var(--yellow60));
+
+
+    --ielts: #e31738;
+    --red: #ff424d;
+    --redD: #ff2933;
+    --redT: #ff424bd5;
+    --redF: #ff1521;
+
+    --blue: #1073eb;
+    --blueD: #0f59d6;
+    --blueT: #114ccc;
+    --blueF: #114ccc;
+
+    --purpel: #9b59b6;
+    --darkPurpel: #1a1715;
+    --gradientPurpleLD: linear-gradient(to right, #7453db, #ba75f9);
+    --gradientPurpleLD1: linear-gradient(to right, #684bd4, #a154f9);
+    --gradientPurpleLD2: linear-gradient(to right, #593ebb, #9741fa);
+    --gradientPurpleLD3: linear-gradient(to right, #583dbb, #9540f6);
+    --gradientPurpleLD4: linear-gradient(to bottom, #583dbb, #9540f6);
+    --purple01: #d7d0d9;
+    --purple10: #fd78d2;
+    --purple20: #a154f9;
+    --purple30: #9d65ea;
+    --purple40: #684bd4;
+    --purple50: #ba75f9; 
+    --purple60: #7453db; 
+    --purple65: #82409d;
+    --purple70: #6c5c7a; 
+    --purple75: #2a2b2f;
+    --purple80: #42354c;
+    --purple90: #291f34; 
+
+    /* Purple Theme */
+    --grey10: #efefef;
+    --grey30: #9b999a;
+    --iPurple01: #eeecfe;
+    --iPurple02: #e9e5ff;
+    --iPurple03: #d9d4fb;
+    --iPurple05: #bab3ee;
+    --iPurple09: #9187d6;
+    --iPurple30: #6b7cfc;
+    --iPurpleD30: #194dbc;
+    --iPurple50: #596cfd;
+    --iPurple60: #5e63f9;
+    --iPurple70: #4349f8;
+    --iPurple80: #5d42f2;
+    --iPurple85: #6723ce;
+    --iPurple90: #5d42f1;
+    --iPurple100: #5339e8;
+
+    --iPurple60: #5e63f9;
+    --iPurple100D: #3b20d4;
+    
+    --iPurpleGradientTR: linear-gradient(to left, var(--iPurple60), var(--iPurple90));
+    --iPurpleGradientTR1: linear-gradient(to left, var(--iPurple30), var(--iPurple100));
+    --iPurpleGradientTR1D: linear-gradient(to right, var(--iPurple70), var(--iPurple100D));
+    --iPurpleGradientTR1D2: linear-gradient(to right, var(--iPurple100D), var(--iPurple70));
+    --iPurpleGD: #20222e;
+    --iPurpleD: #171057;
+
+
+    --logogold30: #fdb913; 
+    --logogold60: #f7941d;    
+}
+
+
+
+
+html, body{
+    background-color: var(--graySh) !important;
+    overflow-x: hidden !important;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    overflow: hidden;
+}
+*{
+    box-sizing: border-box;
+    scrollbar-width: thin;
+}
+*:not(i), body, button, input, textarea, .option{
+    font-family: 'Tajawal', sans-serif !important;
+}
+a{
+    text-decoration: none !important;
+}
+ul,li{
+    list-style: none;
+}
+i{
+    padding: 0px;
+}
+.list {
+    padding-right: 18px;
+}
+.list li{
+    list-style:decimal !important;
+}
+
+
+@media (max-width: 600px) {
+    .container{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+
+.is-size-55 {
+    font-size: 1.15rem !important;
+}
+
+
+
+
+
+
+
