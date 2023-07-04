@@ -7,13 +7,122 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     
     <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/main.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/bulma-rtl.min.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/bulma.min.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/all.min.css'>
 </head>
 <body>
     <div class="contentBox">
-        
+        <div class="smallNav section is-flex is-justify-content-space-between is-align-items-center">
+            <h1 class="is-size-55 has-text-weight-medium" id="quizName">Test Name</h1>
+            <a href="/" class="arrow"><i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+
+        <div class="section quizBox">
+            <div class="columns is-multiline">
+
+                <div class="column is-2 sticksSideBar" id="sticksBox">
+                    <div class="burgerIcon">
+                        <i class="fas fa-stream" id="showHideSideBar"></i>
+                    </div>
+                    <div class="sticksSideBarContent" id="sticksContainer">
+                        <div class="quistion active" role="button">Q1</div>
+                        <div class="quistion answered" role="button">Q2</div>
+                        <div class="quistion" role="button">Q3</div>
+                        <div class="quistion" role="button">Q4</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                        <div class="quistion" role="button">Q5</div>
+                    </div>
+                </div>
+                
+                <div class="column quizData" id="quizDataContentBox">
+                    <div class="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center">
+                        <span class="tag is-prpl is-small"><span id="point" class="point">1</span> degree</span>
+                        <span class="time is-size-3" id="time">0:00</span>
+                        <span class="has-text-weight-medium is-size-4"><span class="queue" id="nowQueNum">1</span>/<span class="maxera" id="maxQueNum"></span>13</span></span>
+                    </div>
+
+                    <div class="allQuestionsBox" id="questionContainer">
+                        <div class="questionHolder">
+                            <p class="is-size-4 has-text-weight-semibold">Question head (title)</p>
+                            <img src="https://via.placeholder.com/1000x200" alt="">
+                            <p class="subtitle is-size-5 paragraph">Question details</p>
+                            <div class="field control is-flex is-flex-direction-column">
+                                <label class="ans">
+                                    <input type="radio" name="que"> Option 1
+                                </label>
+                                <label class="ans">
+                                    <input type="radio" name="que"> Option 2
+                                </label>
+                                <label class="ans">
+                                    <input type="radio" name="que"> Option 3
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="is-flex is-justify-content-space-between controler buttonato">
+                        <button class="button is-prpl prev" id="previousBtn" disabled="true"><i class="fa-solid fa-chevron-left"></i> Previous Question</button>
+                        <button class="button is-prpl next" id="nextBtn">Next Question <i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+
+    <footer class="footer">
+        <div class="is-flex is-align-items-center is-justify-content-space-between flexBox">
+            <p class="is-size-6 has-text-weight-medium">Made By <a href="https://github.com/HamzaElkotp" class="has-text-purple has-text-weight-semibold is-size-55">Hamza Elkotb</a></p>
+            <p class="is-size-55 has-text-weight-medium"><span class="date"></span>&copy; Under <a href="https://github.com/HamzaElkotp/Quiz-Answers_Project/blob/main/LICENSE" class="has-text-purple has-text-weight-semibold">MIT</a> License</p>
+            <p class="button is-small is-prpl donate" role="button" id="donate">Donate Me</p>
+        </div>
+    </footer>
 </body>
 </html>
 <script src='/assets/javascript/main.js'></script>
+<script>
+    const date = document.querySelector(".date");
+    const today = (new Date()).getFullYear();
+    date.textContent = today;
+
+    const donateBtn = document.querySelector(".donate");
+    donateBtn.addEventListener('click', ()=>{
+        window.open("https://www.buymeacoffee.com/HamzaElkotp")
+        window.open("https://www.paypal.com/paypalme/dtcHamza")
+        window.open("https://www.patreon.com/HamzaElkotb")
+    })
+
+
+    const quizName = document.getElementById("quizName");
+    const sticksBox = document.getElementById("sticksBox");
+    const showHideSideBar = document.getElementById("showHideSideBar");
+    const quizDataContentBox = document.getElementById("showHideSideBar");
+    const sticksContainer = document.getElementById("sticksContainer");
+    const questionContainer = document.getElementById("questionContainer");
+
+    showHideSideBar?.addEventListener('click', ()=>{
+        sticksBox.classList.toggle('hide');
+    })
+
+
+    const point = document.getElementById("point");
+    const time = document.getElementById("time");
+    const nowQueNum = document.getElementById("nowQueNum");
+    const maxQueNum = document.getElementById("maxQueNum");
+    const previousBtn = document.getElementById("previousBtn");
+    const nextBtn = document.getElementById("nextBtn");
+</script>

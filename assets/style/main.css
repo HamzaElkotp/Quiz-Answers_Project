@@ -184,6 +184,78 @@ i{
 .is-size-55 {
     font-size: 1.15rem !important;
 }
+.tag.is-prpl {
+    background: var(--iPurple80);
+    color: var(--whiteBg);
+    font-size: 13px;
+    font-weight: 600;
+}
+img {
+    height: auto;
+    width: 100%;
+}
+
+
+.button.is-semismall {
+    padding: 20px 50px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.button.is-prpl {
+    /* background-color: var(--gold); */
+    background-color: var(--iPurple90);
+    border-color: transparent;
+    color: #fff
+}
+.button.is-prpl[disabled] {
+    background: var(--iPurple80);
+}
+.button.is-prpl.is-hovered, .button.is-prpl:hover {
+    /* background-color: var(--yellow30); */
+    background-color: var(--iPurple70);
+    border-color: transparent;
+    color: #fff
+}
+.button.is-prpl.is-focused, .button.is-prpl:focus {
+    border-color: transparent;
+    color: #fff
+}
+.button.is-prpl.is-focused:not(:active), .button.is-prpl:focus:not(:active) {
+    box-shadow: 0 0 0 .125em rgba(0, 45, 209, 0.25)
+}
+.button.is-prpl.is-active, .button.is-prpl:active {
+    /* background-color: var(--yellow40); */
+    background-color: var(--iPurple80);
+    border-color: transparent;
+    color: #fff
+}
+.button.is-prpl.is-outlined {
+    background-color: var(--gray30);
+    border-color: var(--iPurple90);
+    color: var(--iPurple100);
+    transition: 0.5s background-color, 0.5s color;
+}
+.button.is-prpl.is-outlined:hover {
+    background-color: var(--iPurple90);
+    border-color: var(--iPurple90);
+    color: var(--gray30)
+}
+
+.fa-chevron-left {
+    padding-right: 5px;
+}
+.fa-chevron-right {
+    padding-left: 5px;
+}
+
+.has-text-purple {
+    color: var(--iPurple80);
+}
+
+.is-size-55 {
+    font-size: 1.12rem !important;
+}
 
 
 
@@ -191,3 +263,212 @@ i{
 
 
 
+.smallNav{
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    background-color: var(--gray10);
+}
+.arrow {
+    font-size: 25px;
+    display: block;
+    position: relative;
+}
+.arrow:hover {
+    color: var(--iPurple100);
+}
+.arrow:hover::after {
+    opacity: 1;
+}
+.arrow::after {
+    content: 'back';
+    right: 20px;
+    position: absolute;
+    top: 2px;
+    opacity: 0;
+    transition: 0.5s opacity;
+    font-size: 20px;
+    font-weight: 500;
+}
+.quizBox.section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.quizBox .column{
+    transition: 0.8s width;
+}
+.quizBox .sticksSideBar .burgerIcon {
+  font-size: 24px;
+  text-align: end;
+  color: var(--iPurple80);
+}
+.quizBox .sticksSideBar .burgerIcon i{
+    cursor: pointer;
+}
+.sticksSideBarContent{
+    transition: 0.6s;
+    max-height: calc(100% - 60px);
+    overflow-y: auto;
+    padding: 5px 10px 20px 5px;
+    direction: ltr;
+    text-align: start;
+}
+.quizBox .sticksSideBar.hide {
+    width: 3.1%;
+}
+.quizBox .sticksSideBar.hide .sticksSideBarContent{
+    opacity: 0;
+}
+.quizBox .column.quizData {
+    /* height: calc(100vh - 60px);
+    overflow-y: auto; */
+}
+
+.quizBox .quizData .point{
+    padding-right: 5px;
+}
+.quizBox .quizData .queue{
+    color: var(--iPurple80)
+}
+.quizBox .quizData .time {
+    font-weight: 500 !important;
+}
+
+
+.quizBox .sticksSideBar {
+    max-height: calc(100vh - 60px) !important;
+}
+.quizBox .sticksSideBar.hide .quistion{
+    pointer-events: none;
+}
+.quizBox .sticksSideBarContent .quistion {
+    background-color: var(--iPurple03);
+    padding: 6px 20px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 10px !important;
+    border: 2px solid var(--iPurple03);
+}
+.quizBox .sticksSideBarContent .quistion.active {
+    color: #fff;
+    background: var(--iPurpleGradientTR1D);
+    font-weight: 600;
+    padding: 8px 20px;
+    border: none;
+}
+.quizBox .sticksSideBarContent .quistion.answered {
+    color: #fff;
+    background-color: var(--iPurpleGD);
+    border: 2px solid var(--blue);
+}
+
+
+
+.quizBox .column .questionHolder {
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-bottom: 15px;
+}
+.quizBox .quizData .questionHolder img {
+    margin-top: 1.5rem;
+}
+.quizBox .quizData .questionHolder label {
+    font-size: 17px;
+    font-weight: 500;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+.quizBox .quizData .questionHolder input[type="radio"] {
+    width: 20px !important;
+    height: 20px !important;
+    margin-right: 10px;
+}
+.quizBox .quizData .questionHolder label.active {
+    color: var(--iPurple70);
+}
+
+
+
+@media (max-width: 770px){
+    .quizBox .sticksSideBar{
+        max-height: 300px;
+        height: 300px;
+        width: 100%;
+        transition: 0.8s height;
+    }
+    .quizBox .sticksSideBar.hide{
+        width: 100%;
+        height: 0px;
+    }
+    .quizBox .column .questionHolder {
+        padding-right: 10px;
+    }
+    .quizBox .sticksSideBarContent {
+        padding-right: 10px;
+        padding-left: 0px;
+    }
+    .quizBox .column .questionHolder {
+        max-height: calc(100vh - 250px);
+    }
+}
+
+@media (max-width: 500px){
+    .quizBox .is-flex.is-justify-content-space-between.controler.buttonato {
+        flex-direction: column !important;
+    }
+    .quizBox .buttonato .button + .button {
+        margin-top: 5px;
+    }
+    .quizBox .column{
+        padding-left: 5px;
+        padding-right: 2px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer {
+    background-color: var(--graybg) !important;
+    padding: 15px 30px !important;
+}
+.button.donate {
+    letter-spacing: 1px;
+    font-size: 1rem !important;
+    height: 28px;
+    font-weight: 600 !important;
+    padding: 16px 10px;
+    border-radius: 6px !important;
+}
+@media (max-width: 600px){
+    .footer {
+        padding: 10px 30px !important;
+    }
+    .flexBox{
+        flex-direction: column !important;
+    }
+    .flexBox *:not(:last-child){
+        margin-bottom: 2px;
+    }
+}
