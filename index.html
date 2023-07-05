@@ -13,7 +13,7 @@
 <body>
     <div class="contentBox">
         <div class="smallNav section is-flex is-justify-content-space-between is-align-items-center">
-            <h1 class="is-size-55 has-text-weight-medium" id="quizName">Test Name</h1>
+            <h1 class="is-size-55 has-text-weight-medium" id="quizName"></h1>
             <a href="/" class="arrow"><i class="fa-solid fa-chevron-right"></i></a>
         </div>
 
@@ -49,28 +49,12 @@
                 
                 <div class="column quizData" id="quizDataContentBox">
                     <div class="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center">
-                        <span class="tag is-prpl is-small"><span id="point" class="point">1</span> degree</span>
-                        <span class="time is-size-3" id="time">0:00</span>
-                        <span class="has-text-weight-medium is-size-4"><span class="queue" id="nowQueNum">1</span>/<span class="maxera" id="maxQueNum"></span>13</span></span>
+                        <span class="tag is-prpl is-small"><span id="point" class="point"></span> degree</span>
+                        <span class="time is-size-3" id="time"></span>
+                        <span class="has-text-weight-medium is-size-4"><span class="queue" id="nowQueNum">1</span>/<span class="maxera" id="maxQueNum"></span></span>
                     </div>
 
                     <div class="allQuestionsBox" id="questionContainer">
-                        <div class="questionHolder">
-                            <p class="is-size-4 has-text-weight-semibold">Question head (title)</p>
-                            <img src="https://via.placeholder.com/1000x200" alt="">
-                            <p class="subtitle is-size-5 paragraph">Question details</p>
-                            <div class="field control is-flex is-flex-direction-column">
-                                <label class="ans">
-                                    <input type="radio" name="que"> Option 1
-                                </label>
-                                <label class="ans">
-                                    <input type="radio" name="que"> Option 2
-                                </label>
-                                <label class="ans">
-                                    <input type="radio" name="que"> Option 3
-                                </label>
-                            </div>
-                        </div>
 
                     </div>
 
@@ -125,4 +109,116 @@
     const maxQueNum = document.getElementById("maxQueNum");
     const previousBtn = document.getElementById("previousBtn");
     const nextBtn = document.getElementById("nextBtn");
+
+
+
+
+
+
+
+    const composer = function(...funcs){
+        return async function(value){
+            for(func of funcs){
+                value = await func(value)
+            }
+            return value
+        }
+    }
+
+    async function fetchQuiz(api){
+        let response = await fetch(api);
+        let data = await response.json();
+        
+        if(!response.ok){ return false}
+        return data
+    }
+
+    const setQuizName = function(data){
+        quizName.textContent = data["quizName"];
+        return data
+    }
+
+    const setTimer = function(data){
+        time.textContent = data["timer"];
+        return data;
+    }
+
+
+    const loopThroughQuestion = function(data){
+        data["questions"].forEach((que)=>{
+            pushQuestions(que)
+        })
+        return data
+    }
+
+
+
+    const pushSingleQue = function(queData){
+        let queParent = document.createElement("div");
+        queParent.classList.add("questionHolder");
+        queParent.setAttribute("degree", queData["queDegree"]);
+        questionContainer.append(queParent);
+        return [queData, queParent]
+    }
+    const pushSingleQueData = function(dataArr){
+        let queData = dataArr[0];
+        let queParent = dataArr[1];
+
+        let title = document.createElement("p");
+        title.textContent = queData["queTitle"];
+        title.classList.add("is-size-4", "has-text-weight-semibold");
+        queParent.append(title);
+
+        if(queData["queImage"] != ""){
+            let img = document.createElement("img");
+            img.src = queData["queImage"]
+            queParent.append(img);
+        }
+
+        let subtitle = document.createElement("p");
+        subtitle.textContent = queData["queDetails"];
+        subtitle.classList.add("subtitle", "is-size-5", "paragraph");
+        queParent.append(subtitle);
+
+        return dataArr
+    }
+    const pushOptions = function(dataArr){
+        let queData = dataArr[0];
+        let queParent = dataArr[1];
+
+        let optionsBox = document.createElement("div");
+        optionsBox.classList.add("field", "control", "is-flex", "is-flex-direction-column");
+        queParent.append(optionsBox);
+
+        let optionBoxNum = queData["queId"];
+
+        queData["queChoices"].forEach(option => {
+            let label = document.createElement('label');
+            label.classList.add("ans");
+
+            let radio = document.createElement('input');
+            radio.type = "radio";
+            radio.name = `que${optionBoxNum}`;
+            label.append(radio);
+            label.append(document.createTextNode(option["optionValue"]));
+            optionsBox.append(label);
+        });
+
+        return dataArr
+    }
+    const increaseQueNum = function(dataArr){
+        let queData = dataArr[0];
+        let queParent = dataArr[1];
+
+        maxQueNum.textContent = Number(maxQueNum.textContent)+1
+    }
+
+
+    const startTimer = function(data){
+
+    }
+
+    const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, increaseQueNum);
+    const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion)
+    initQuiz("/samples/quizTemplate.json")
 </script>
