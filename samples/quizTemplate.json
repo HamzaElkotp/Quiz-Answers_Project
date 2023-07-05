@@ -1,0 +1,108 @@
+{
+    "quizName": "Physics Lesson 01 - Test 01",
+    "timer": "6:00",
+    "questions": [
+        {
+            "queId": 0,
+            "queTitle": "Choose the right answer about the right scientific discipline",
+            "queImage": "https://via.placeholder.com/500x50",
+            "queDetails": "Which scientific discipline deals with the study of matter, energy, and their interactions?",
+            "queDegree": "2",
+            "queChoices": [
+                {
+                    "optionValue": "Physics"
+                },
+                {
+                    "optionValue": "Psychology"
+                },
+                {
+                    "optionValue": "Biology"
+                }
+            ],
+            "trueAnswer": 0
+        },
+        {
+            "queId": 1,
+            "queTitle": "Choose the right answer about the right field of science",
+            "queImage": "",
+            "queDetails": "What field of science explores the fundamental principles of motion, forces, and energy?",
+            "queDegree": "1",
+            "queChoices": [
+                {
+                    "optionValue": "Sociology"
+                },
+                {
+                    "optionValue": "Linguistics"
+                },
+                {
+                    "optionValue": "Physics"
+                },
+                {
+                    "optionValue": "Astronomy"
+                }
+            ],
+            "trueAnswer": 2
+        },
+        {
+            "queId": 2,
+            "queTitle": "Choose the right answer about the right branch of science",
+            "queImage": "https://via.placeholder.com/3000x200",
+            "queDetails": "Which branch of science investigates the properties and behavior of light and its interaction with matter?",
+            "queDegree": "3",
+            "queChoices": [
+                {
+                    "optionValue": "Sociology"
+                },
+                {
+                    "optionValue": "Philosophy"
+                }
+            ],
+            "trueAnswer": 1
+        },
+        {
+            "queId": 3,
+            "queTitle": "Choose the right answer about the right scientific discipline",
+            "queImage": "https://via.placeholder.com/1000x200",
+            "queDetails": "What scientific discipline studies the nature and behavior of electric charges and their interaction with electromagnetic fields?",
+            "queDegree": "3",
+            "queChoices": [
+                {
+                    "optionValue": "Physics"
+                },
+                {
+                    "optionValue": "Sociology"
+                },
+                {
+                    "optionValue": "History"
+                },
+                {
+                    "optionValue": "Literature"
+                },
+                {
+                    "optionValue": "Psychology"
+                }
+            ],
+            "trueAnswer": 3
+        }
+        ,
+        {
+            "queId": 4,
+            "queTitle": "Choose the right answer about the right field of science",
+            "queImage": "",
+            "queDetails": "Which field of science is concerned with the structure, properties, and behavior of matter and the changes it undergoes during chemical reactions?",
+            "queDegree": "1",
+            "queChoices": [
+                {
+                    "optionValue": "Mathematics"
+                },
+                {
+                    "optionValue": "Physics"
+                },
+                {
+                    "optionValue": "Economics"
+                }
+            ],
+            "trueAnswer": 2
+        }
+    ]
+}
