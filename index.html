@@ -139,6 +139,7 @@
         let queParent = document.createElement("div");
         queParent.classList.add("questionHolder", "hide");
         queParent.setAttribute("degree", queData["queDegree"]);
+        queParent.setAttribute("queId", queData["queId"]);
         questionContainer.append(queParent);
         return [queData, queParent]
     }
@@ -198,17 +199,39 @@
         let stick = document.createElement("div");
         stick.classList.add("quistion");
         stick.role = "button";
+        stick.setAttribute("sticknumber", queData["queId"]);
         stick.textContent = `Q${queData["queId"]+1}`
 
         sticksContainer.append(stick);
 
-        return dataArr
+        return [...dataArr, stick]
+    }
+    const activateQueStick = function(dataArr){
+        let stick = dataArr[2];
+
+        stick.addEventListener('click', ()=>{
+            // active the current and unactive the active
+            let activeStick = sticksContainer.querySelector(".quistion.active");
+            activeStick.classList.remove("active");
+            stick.classList.add("active");
+
+            // activate the question and hide the activated question
+            let oldQue = questionContainer.querySelector(".questionHolder:not(.hide)");
+            oldQue.classList.add("hide");
+            let newQue = questionContainer.querySelector(`[queId='${dataArr[0]["queId"]}']`)
+            newQue.classList.remove("hide");
+
+            // update question degree
+            point.textContent = newQue.getAttribute("degree");
+        });        
+
+        return [dataArr[0], dataArr[1]]
     }
 
 
 
 
-
+    // set events
     const active1stQue = function(data){
         let firstStick = document.querySelector(".quistion");
         let firstQue = document.querySelector(".questionHolder");
@@ -239,10 +262,14 @@
             }
         }
     }
+    const stickClickEvent = function(params) {
+        
+    }
 
 
 
-    const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, increaseQueNum, createQueStick, active1stQue);
+
+    const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, increaseQueNum, createQueStick, activateQueStick, active1stQue);
     const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion, startTimer)
     initQuiz("/samples/quizTemplate.json")
 </script>
