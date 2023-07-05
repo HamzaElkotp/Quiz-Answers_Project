@@ -370,6 +370,9 @@ img {
     padding-right: 10px;
     margin-bottom: 15px;
 }
+.quizBox .column .questionHolder.hide {
+    display: none;
+}
 .quizBox .quizData .questionHolder img {
     margin-top: 1.5rem;
 }

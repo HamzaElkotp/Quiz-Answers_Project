@@ -137,7 +137,7 @@
 
     const pushSingleQue = function(queData){
         let queParent = document.createElement("div");
-        queParent.classList.add("questionHolder");
+        queParent.classList.add("questionHolder", "hide");
         queParent.setAttribute("degree", queData["queDegree"]);
         questionContainer.append(queParent);
         return [queData, queParent]
@@ -206,11 +206,43 @@
     }
 
 
-    const startTimer = function(data){
 
+
+
+    const active1stQue = function(data){
+        let firstStick = document.querySelector(".quistion");
+        let firstQue = document.querySelector(".questionHolder");
+        firstStick.classList.add("active");
+        firstQue.classList.remove("hide");
+        point.textContent = firstQue.getAttribute("degree");
+        return data
+    }
+    const startTimer = function(data){
+        let timer = data["timer"].split(":");
+        
+        let minuts = timer[0];
+        let seconds = timer[1];
+        let handler = setInterval(descrease, 900);
+        function descrease(){
+            if(minuts == "00" && seconds == "0"){
+                clearInterval(handler)
+            }else{
+                if(seconds == "00"){
+                    seconds = "59";
+                    minuts -= 1;
+                    time.textContent = `${minuts.toString().padStart(2,0)}:${seconds}`;
+                }
+                else{
+                    seconds -= 1;
+                    time.textContent = `${minuts.toString().padStart(2,0)}:${seconds.toString().padStart(2,0)}`;
+                }
+            }
+        }
     }
 
-    const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, increaseQueNum, createQueStick);
-    const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion)
+
+
+    const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, increaseQueNum, createQueStick, active1stQue);
+    const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion, startTimer)
     initQuiz("/samples/quizTemplate.json")
 </script>
