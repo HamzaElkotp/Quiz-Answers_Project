@@ -25,25 +25,7 @@
                         <i class="fas fa-stream" id="showHideSideBar"></i>
                     </div>
                     <div class="sticksSideBarContent" id="sticksContainer">
-                        <div class="quistion active" role="button">Q1</div>
-                        <div class="quistion answered" role="button">Q2</div>
-                        <div class="quistion" role="button">Q3</div>
-                        <div class="quistion" role="button">Q4</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
-                        <div class="quistion" role="button">Q5</div>
+                        
                     </div>
                 </div>
                 
@@ -207,10 +189,20 @@
         return dataArr
     }
     const increaseQueNum = function(dataArr){
+        maxQueNum.textContent = Number(maxQueNum.textContent)+1;
+        return dataArr
+    }
+    const createQueStick = function(dataArr){
         let queData = dataArr[0];
-        let queParent = dataArr[1];
+        
+        let stick = document.createElement("div");
+        stick.classList.add("quistion");
+        stick.role = "button";
+        stick.textContent = `Q${queData["queId"]+1}`
 
-        maxQueNum.textContent = Number(maxQueNum.textContent)+1
+        sticksContainer.append(stick);
+
+        return dataArr
     }
 
 
@@ -218,7 +210,7 @@
 
     }
 
-    const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, increaseQueNum);
+    const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, increaseQueNum, createQueStick);
     const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion)
     initQuiz("/samples/quizTemplate.json")
 </script>
