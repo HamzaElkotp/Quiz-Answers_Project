@@ -234,6 +234,18 @@
 
             // Update current question counter
             nowQueNum.textContent = currQueId+1;
+
+            if(currQueId == minQueId){
+                previousBtn.disabled = true;
+            }else{
+                previousBtn.disabled = false;
+            }
+
+            if(currQueId == maxQueId){
+                nextBtn.disabled = true;
+            }else{
+                nextBtn.disabled = false;
+            }
         });        
 
         return [dataArr[0], dataArr[1]]
