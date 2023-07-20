@@ -93,6 +93,9 @@
     const nextBtn = document.getElementById("nextBtn");
 
 
+    let minQueId = 0;
+    let currQueId = 0;
+    let maxQueId = null;
 
 
 
@@ -211,18 +214,26 @@
 
         stick.addEventListener('click', ()=>{
             // active the current and unactive the active
-            let activeStick = sticksContainer.querySelector(".quistion.active");
+            let activeStick = sticksContainer.querySelector(`[sticknumber='${currQueId}']`);
             activeStick.classList.remove("active");
             stick.classList.add("active");
 
-            // activate the question and hide the activated question
-            let oldQue = questionContainer.querySelector(".questionHolder:not(.hide)");
+            // hide the old activated question
+            let oldQue = questionContainer.querySelector(`[queId="${currQueId}"]`);
             oldQue.classList.add("hide");
-            let newQue = questionContainer.querySelector(`[queId='${dataArr[0]["queId"]}']`)
+
+            // activate the new question and 
+            let newQueID = stick.getAttribute("sticknumber");
+            currQueId = Number(newQueID);
+
+            let newQue = questionContainer.querySelector(`[queId="${currQueId}"]`);
             newQue.classList.remove("hide");
 
             // update question degree
             point.textContent = newQue.getAttribute("degree");
+
+            // Update current question counter
+            nowQueNum.textContent = currQueId+1;
         });        
 
         return [dataArr[0], dataArr[1]]
@@ -261,15 +272,78 @@
                 }
             }
         }
+
+        return data
     }
     const stickClickEvent = function(params) {
         
+    }
+
+    const activateMoveButtons = function(data){
+        maxQueId = data["questions"].length-1;
+
+        previousBtn.addEventListener('click', (e)=>{
+            e.preventDefault();
+            if(currQueId > minQueId){
+                // hide the old activated question
+                let prevEleId = document.querySelector(`[queId="${currQueId}"]`);
+                prevEleId.classList.add("hide");
+
+                // unactivate the old activated question stick
+                let activeStick = sticksContainer.querySelector(`[sticknumber='${currQueId}']`);
+                activeStick.classList.remove("active");
+
+                // show the previous question
+                let currEleId = document.querySelector(`[queId="${--currQueId}"]`);
+                currEleId.classList.remove("hide");
+
+                // activate the previous question stick
+                let currStick = document.querySelector(`[sticknumber="${currQueId}"]`);
+                currStick.classList.add("active");
+
+                if(currQueId == minQueId){
+                    previousBtn.disabled = true;
+                }
+            }
+            nextBtn.disabled = false;
+
+            // Update current question counter
+            nowQueNum.textContent = currQueId+1;
+        });
+        nextBtn.addEventListener('click', (e)=>{
+            e.preventDefault();
+            if(currQueId < maxQueId){
+                // hide the old activated question
+                let prevEleId = document.querySelector(`[queId="${currQueId}"]`);
+                prevEleId.classList.add("hide");
+
+                // unactivate the old activated question stick
+                let activeStick = sticksContainer.querySelector(`[sticknumber='${currQueId}']`);
+                activeStick.classList.remove("active");
+
+                // show the next question
+                let currEleId = document.querySelector(`[queId="${++currQueId}"]`);
+                currEleId.classList.remove("hide");
+
+                // activate the next question stick
+                let currStick = document.querySelector(`[sticknumber="${currQueId}"]`);
+                currStick.classList.add("active");
+
+                if(currQueId == maxQueId){
+                    nextBtn.disabled = true;
+                }
+            }
+            previousBtn.disabled = false;
+
+            // Update current question counter
+            nowQueNum.textContent = currQueId+1;
+        });
     }
 
 
 
 
     const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, increaseQueNum, createQueStick, activateQueStick, active1stQue);
-    const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion, startTimer)
+    const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion, startTimer, activateMoveButtons)
     initQuiz("/samples/quizTemplate.json")
 </script>
