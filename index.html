@@ -48,6 +48,13 @@
 
             </div>
         </div>
+
+        <audio class="hiddenAudio" id="dangerAudio" >
+            <source src="/assets/audios/dagner.mp3" type="audio/ogg">
+        </audio>
+        <audio class="hiddenAudio" id="verydangerAudio" >
+            <source src="/assets/audios/veryDanger.wav" type="audio/ogg">
+        </audio>
     </div>
 
     <footer class="footer">
@@ -91,6 +98,9 @@
     const maxQueNum = document.getElementById("maxQueNum");
     const previousBtn = document.getElementById("previousBtn");
     const nextBtn = document.getElementById("nextBtn");
+
+    const dangerAudio = document.getElementById("dangerAudio");
+    const verydangerAudio = document.getElementById("verydangerAudio");
 
 
     let minQueId = 0;
@@ -263,6 +273,43 @@
         point.textContent = firstQue.getAttribute("degree");
         return data
     }
+
+
+    const settCounterWanr = function(data){
+        time.classList.toggle("warn")
+        return data
+    }
+
+    const setCounterDager = function(data){
+        time.classList.remove("warn");
+        time.classList.toggle("danger");
+        dangerAudio.play()
+        return data
+    }
+
+    const setCounterMoreDager = function(data){
+        time.classList.add("danger");
+        time.classList.toggle("moredanger");
+        verydangerAudio.play()
+        return data
+    }
+
+    const finishTimer = function(){
+        let audioHandle = setInterval(audioRun, 350);
+        let times = 8;
+        function audioRun(){
+            setTimeout(() => {
+                verydangerAudio.play();
+                time.classList.toggle("moredanger");
+            }, 0);
+            times--
+            if(times == 0){
+                clearInterval(audioHandle)
+            }
+        }
+    
+    }
+
     const startTimer = function(data){
         let timer = data["timer"].split(":");
         
@@ -270,8 +317,17 @@
         let seconds = timer[1];
         let handler = setInterval(descrease, 900);
         function descrease(){
+            if((minuts == "00" && seconds <= "59" && seconds >= "31") || (minuts == "01" && seconds <= "00")){
+                settCounterWanr()
+            }
+            else if(minuts == "00" && seconds <= "31" && seconds > "11"){
+                setCounterDager()
+            }else if(minuts == "00" && seconds <= "11"){
+                setCounterMoreDager()
+            }
             if(minuts == "00" && seconds == "0"){
-                clearInterval(handler)
+                clearInterval(handler);
+                finishTimer()
             }else{
                 if(seconds == "00"){
                     seconds = "59";

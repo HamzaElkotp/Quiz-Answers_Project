@@ -432,9 +432,15 @@ img {
 
 
 
-
-
-
+.time.warn{
+    color: #e3a600;
+}
+.time.danger{
+    color: #c20020;
+}
+.time.moredanger{
+    color: #ff0000;
+}
 
 
 
