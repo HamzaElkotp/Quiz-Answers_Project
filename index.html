@@ -339,12 +339,12 @@
         let handler = setInterval(descrease, 900);
         function descrease(){
             if((minuts == "00" && seconds <= "59" && seconds >= "31") || (minuts == "01" && seconds <= "00")){
-                settCounterWanr()
+                settCounterWanr();
             }
             else if(minuts == "00" && seconds <= "31" && seconds > "11"){
-                setCounterDager()
+                setCounterDager();
             }else if(minuts == "00" && seconds <= "11"){
-                setCounterMoreDager()
+                setCounterMoreDager();
             }
             if(minuts == "00" && seconds == "0"){
                 clearInterval(handler);
@@ -445,6 +445,10 @@
         })
         return data
     }
+    const disableQueBox = function(data){
+        questionContainer.classList.add("disable")
+        return data
+    }
     const startResultPageConnection = function(data){
         let resultWindow = window.open('/results.html', '_blank');
 
@@ -453,7 +457,7 @@
         })
     }
 
-    const answerJsonComposer = composer(generateAnswerJson, startResultPageConnection)
+    const answerJsonComposer = composer(disableQueBox, generateAnswerJson, startResultPageConnection)
     const initSubmit = function(data){
         submitBtn.addEventListener('click', ()=>{
             answerJsonComposer(data)

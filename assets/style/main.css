@@ -500,3 +500,25 @@ img {
     font-size: 18px;
     font-weight: 500;
 }
+
+
+.allQuestionsBox{
+    position: relative;
+}
+.allQuestionsBox.disable::after {
+    /* content: 'Quiz Ended, Wait For Results'; */
+    content: '';
+    background-color: #0002753d;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: calc(100% - 10px);
+    position: absolute;
+    border-radius: 10px;
+    /* font-size: 30px !important;
+    font-weight: 600;
+    color: var(--iPurple90);
+    display: flex;
+    justify-content: center;
+    align-items: center; */
+}
