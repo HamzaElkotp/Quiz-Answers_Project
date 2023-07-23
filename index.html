@@ -42,6 +42,7 @@
 
                     <div class="is-flex is-justify-content-space-between controler buttonato">
                         <button class="button is-prpl prev" id="previousBtn" disabled="true"><i class="fa-solid fa-chevron-left"></i> Previous Question</button>
+                        <button class="button is-prpl submit is-semilarge hide" id="submitBtn">Submit and Results <i class="fa-solid fa-file-import"></i></button>
                         <button class="button is-prpl next" id="nextBtn">Next Question <i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
@@ -98,17 +99,17 @@
     const maxQueNum = document.getElementById("maxQueNum");
     const previousBtn = document.getElementById("previousBtn");
     const nextBtn = document.getElementById("nextBtn");
+    const submitBtn = document.getElementById("submitBtn");
 
     const dangerAudio = document.getElementById("dangerAudio");
     const verydangerAudio = document.getElementById("verydangerAudio");
-
 
     let minQueId = 0;
     let currQueId = 0;
     let maxQueId = null;
 
-
-
+    let targetedAnsNum = null;
+    let answeredQuesNum = 0;
 
 
     const composer = function(...funcs){
@@ -133,6 +134,13 @@
         return data
     }
 
+    const increaseAnswered = function(){
+        answeredQuesNum++;
+    }
+    const showSubmitButton = function(){
+        submitBtn.classList.remove('hide');
+    }
+
     const setTimer = function(data){
         time.textContent = data["timer"];
         return data;
@@ -153,6 +161,7 @@
         queParent.classList.add("questionHolder", "hide");
         queParent.setAttribute("degree", queData["queDegree"]);
         queParent.setAttribute("queId", queData["queId"]);
+        queParent.setAttribute("answered", false);
         questionContainer.append(queParent);
         return [queData, queParent]
     }
@@ -188,14 +197,27 @@
 
         let optionBoxNum = queData["queId"];
 
-        queData["queChoices"].forEach(option => {
+        queData["queChoices"].forEach((option, indx) => {
             let label = document.createElement('label');
             label.classList.add("ans");
 
             let radio = document.createElement('input');
             radio.type = "radio";
             radio.name = `que${optionBoxNum}`;
+            radio.setAttribute('inx', indx);
+
             label.append(radio);
+
+            radio.addEventListener('change', ()=>{
+                if(queParent.getAttribute('answered') == "false"){
+                    queParent.setAttribute('answered', true);
+                    increaseAnswered();
+                    if(answeredQuesNum == targetedAnsNum){
+                        showSubmitButton();
+                    }
+                }
+            })
+
             label.append(document.createTextNode(option["optionValue"]));
             optionsBox.append(label);
         });
@@ -204,6 +226,7 @@
     }
     const increaseQueNum = function(dataArr){
         maxQueNum.textContent = Number(maxQueNum.textContent)+1;
+        targetedAnsNum++
         return dataArr
     }
     const createQueStick = function(dataArr){
@@ -343,9 +366,6 @@
 
         return data
     }
-    const stickClickEvent = function(params) {
-        
-    }
 
     const activateMoveButtons = function(data){
         maxQueId = data["questions"].length-1;
@@ -406,12 +426,17 @@
             // Update current question counter
             nowQueNum.textContent = currQueId+1;
         });
+
+        return data
     }
 
 
 
 
+
+
+
     const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, increaseQueNum, createQueStick, activateQueStick, active1stQue);
-    const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion, startTimer, activateMoveButtons)
+    const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion, startTimer, activateMoveButtons, generateAnswerJson)
     initQuiz("/samples/quizTemplate.json")
 </script>
