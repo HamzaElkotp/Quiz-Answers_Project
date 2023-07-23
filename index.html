@@ -349,6 +349,7 @@
             if(minuts == "00" && seconds == "0"){
                 clearInterval(handler);
                 finishTimer();
+                answerJsonComposer(data);
             }else{
                 if(seconds == "00"){
                     seconds = "59";
