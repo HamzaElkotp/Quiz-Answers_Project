@@ -1,0 +1,1 @@
+initQuiz("/samples/quizTemplate.json")
