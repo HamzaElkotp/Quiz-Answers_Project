@@ -285,8 +285,6 @@
     }
 
 
-
-
     // set events
     const active1stQue = function(data){
         let firstStick = document.querySelector(".quistion");
@@ -350,7 +348,7 @@
             }
             if(minuts == "00" && seconds == "0"){
                 clearInterval(handler);
-                finishTimer()
+                finishTimer();
             }else{
                 if(seconds == "00"){
                     seconds = "59";
@@ -431,12 +429,40 @@
     }
 
 
+    const generateAnswerJson = function(data){
+        let oldJSon = data;
+        let questions = data["questions"];
+        questions.forEach((que)=>{
+            let id = que["queId"];
+            let queParent = document.querySelector(`[queid='${id}']`);
+            let ans = null;
+            if(queParent.querySelector("input:checked")){
+                ans = queParent.querySelector("input:checked");
+                ans = Number(ans.getAttribute("inx"));
+            }
+            que["userAnswer"] = ans;
+        })
+        return data
+    }
+    const startResultPageConnection = function(data){
+        let resultWindow = window.open('/results.html', '_blank');
 
+        resultWindow.addEventListener('load', ()=>{
+            resultWindow.postMessage(data, window.location.origin);
+        })
+    }
 
+    const answerJsonComposer = composer(generateAnswerJson, startResultPageConnection)
+    const initSubmit = function(data){
+        submitBtn.addEventListener('click', ()=>{
+            answerJsonComposer(data)
+        })
+        return data
+    }  
 
 
 
     const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, increaseQueNum, createQueStick, activateQueStick, active1stQue);
-    const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion, startTimer, activateMoveButtons, generateAnswerJson)
+    const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion, startTimer, activateMoveButtons, initSubmit)
     initQuiz("/samples/quizTemplate.json")
 </script>
