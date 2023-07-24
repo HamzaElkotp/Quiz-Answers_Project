@@ -239,6 +239,14 @@ const createQueStick = function (dataArr) {
 
     return [...dataArr, stick]
 }
+
+const updatePoint = function(newQue){
+    return newQue.getAttribute("degree");
+}
+const updateGettedPoint = function(newQue){
+    return newQue.getAttribute("getteddegree");
+}
+
 const activateQueStick = function (dataArr) {
     let stick = dataArr[2];
 
@@ -260,7 +268,11 @@ const activateQueStick = function (dataArr) {
         newQue.classList.remove("hide");
 
         // update question degree
-        point.textContent = newQue.getAttribute("degree");
+        point.textContent = updatePoint(newQue);
+        if(gettedPoint){ // works only in results
+            gettedPoint.textContent = updateGettedPoint(newQue);
+        }
+
 
         // Update current question counter
         nowQueNum.textContent = currQueId + 1;
@@ -390,6 +402,11 @@ const activateMoveButtons = function (data) {
             let currStick = document.querySelector(`[sticknumber="${currQueId}"]`);
             currStick.classList.add("active");
 
+            point.textContent = updatePoint(currEleId);
+            if(gettedPoint){ // works only in results
+                gettedPoint.textContent = updateGettedPoint(currEleId);
+            }
+
             if (currQueId == minQueId) {
                 previousBtn.disabled = true;
             }
@@ -417,6 +434,11 @@ const activateMoveButtons = function (data) {
             // activate the next question stick
             let currStick = document.querySelector(`[sticknumber="${currQueId}"]`);
             currStick.classList.add("active");
+
+            point.textContent = updatePoint(currEleId);
+            if(gettedPoint){ // works only in results
+                gettedPoint.textContent = updateGettedPoint(currEleId);
+            }
 
             if (currQueId == maxQueId) {
                 nextBtn.disabled = true;
@@ -486,4 +508,3 @@ const answerJsonComposer = composer(disableQueBox, generateAnswerJson, startResu
 
 const pushQuestionsResult = composer(pushSingleQueToRes, increseTrueAnswdNum, pushSingleQueData, pushOptionsDisabled, increaseQueNumToRes, createQueStick, calcPercent, activateQueStick, active1stQue);
 const resultCcontrol = composer(setQuizName, loopThroughResultQuestion, activateMoveButtons);
-
