@@ -107,6 +107,26 @@ const pushSingleQue = function (queData) {
     questionContainer.append(queParent);
     return [queData, queParent]
 }
+const pushSingleQueToRes = function (queData) { // same as pushSingleQue() but for just result
+    let queParent = document.createElement("div");
+    queParent.classList.add("questionHolder", "hide");
+    queParent.setAttribute("degree", queData["queDegree"]);
+    queParent.setAttribute("gettedDegree", queData["queDegree"]);
+
+    if(queData["trueAnswer"] != queData["userAnswer"]){
+        queParent.setAttribute("gettedDegree", 0);
+    }
+    queParent.setAttribute("queId", queData["queId"]);
+    questionContainer.append(queParent);
+    return [queData, queParent]
+}
+const increseTrueAnswdNum = function (dataArr) {
+    let queData = dataArr[0];
+    if(queData["trueAnswer"] == queData["userAnswer"]){
+        trueAnswed.textContent = Number(trueAnswed.textContent)+1;
+    }
+    return dataArr
+}
 const pushSingleQueData = function (dataArr) {
     let queData = dataArr[0];
     let queParent = dataArr[1];
@@ -167,7 +187,7 @@ const pushOptions = function (dataArr) {
     return dataArr
 }
 
-const pushOptionsDisabled = function (dataArr) {
+const pushOptionsDisabled = function (dataArr) { // same as pushOptions() but for just result
     let queData = dataArr[0];
     let queParent = dataArr[1];
 
@@ -198,6 +218,12 @@ const pushOptionsDisabled = function (dataArr) {
 const increaseQueNum = function (dataArr) {
     maxQueNum.textContent = Number(maxQueNum.textContent) + 1;
     targetedAnsNum++
+    return dataArr
+}
+const increaseQueNumToRes = function (dataArr) { // same as increaseQueNum() but for just result
+    maxQueNum.textContent = Number(maxQueNum.textContent) + 1;
+    allQues.textContent = Number(allQues.textContent) + 1;
+
     return dataArr
 }
 const createQueStick = function (dataArr) {
@@ -265,6 +291,11 @@ const active1stQue = function (data) {
     point.textContent = firstQue.getAttribute("degree");
     return data
 }
+const calcPercent = function (data){
+    percent.textContent = `${Math.round((Number(trueAnswed.textContent)*100)/Number(allQues.textContent))}%`;
+    return data
+}
+
 
 
 const settCounterWanr = function (data) {
@@ -453,6 +484,6 @@ const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, in
 const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion, startTimer, activateMoveButtons, initSubmit);
 const answerJsonComposer = composer(disableQueBox, generateAnswerJson, startResultPageConnection);
 
-const pushQuestionsResult = composer(pushSingleQue, pushSingleQueData, pushOptionsDisabled, increaseQueNum, createQueStick, activateQueStick, active1stQue);
-const resultCcontrol = composer(setQuizName, loopThroughResultQuestion, activateMoveButtons)
+const pushQuestionsResult = composer(pushSingleQueToRes, increseTrueAnswdNum, pushSingleQueData, pushOptionsDisabled, increaseQueNumToRes, createQueStick, calcPercent, activateQueStick, active1stQue);
+const resultCcontrol = composer(setQuizName, loopThroughResultQuestion, activateMoveButtons);
 

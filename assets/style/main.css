@@ -184,6 +184,9 @@ i{
 .is-size-55 {
     font-size: 1.15rem !important;
 }
+span.is-prpl {
+    color: var(--iPurple80);
+}
 .tag.is-prpl {
     background: var(--iPurple80);
     color: var(--whiteBg);
