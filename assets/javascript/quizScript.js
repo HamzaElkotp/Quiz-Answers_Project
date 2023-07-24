@@ -26,6 +26,12 @@ const point = document.getElementById("point");
 const time = document.getElementById("time");
 const nowQueNum = document.getElementById("nowQueNum");
 const maxQueNum = document.getElementById("maxQueNum");
+
+const gettedPoint = document.getElementById("gettedPoint");
+const trueAnswed = document.getElementById("trueAnswed");
+const allQues = document.getElementById("allQues");
+const percent = document.getElementById("percent");
+
 const previousBtn = document.getElementById("previousBtn");
 const nextBtn = document.getElementById("nextBtn");
 const submitBtn = document.getElementById("submitBtn");
@@ -79,6 +85,13 @@ const setTimer = function (data) {
 const loopThroughQuestion = function (data) {
     data["questions"].forEach((que) => {
         pushQuestions(que)
+    })
+    return data
+}
+
+const loopThroughResultQuestion = function (data) {
+    data["questions"].forEach((que) => {
+        pushQuestionsResult(que)
     })
     return data
 }
@@ -153,6 +166,35 @@ const pushOptions = function (dataArr) {
 
     return dataArr
 }
+
+const pushOptionsDisabled = function (dataArr) {
+    let queData = dataArr[0];
+    let queParent = dataArr[1];
+
+    let optionsBox = document.createElement("div");
+    optionsBox.classList.add("field", "control", "is-flex", "is-flex-direction-column");
+    queParent.append(optionsBox);
+
+    let optionBoxNum = queData["queId"];
+
+    queData["queChoices"].forEach((option, indx) => {
+        let label = document.createElement('label');
+        label.classList.add("ans");
+
+        let radio = document.createElement('input');
+        radio.type = "radio";
+        radio.name = `que${optionBoxNum}`;
+        radio.setAttribute('inx', indx);
+        radio.disabled = true;
+
+        label.append(radio);
+        label.append(document.createTextNode(option["optionValue"]));
+        optionsBox.append(label);
+    });
+
+    return dataArr
+}
+
 const increaseQueNum = function (dataArr) {
     maxQueNum.textContent = Number(maxQueNum.textContent) + 1;
     targetedAnsNum++
@@ -395,6 +437,22 @@ const initSubmit = function (data) {
 
 
 
+const generateConnectionWithQuiz= function(){
+    let receivedData = null
+    window.addEventListener('message', function (event) {
+        if (event.origin === window.location.origin) {
+            receivedData = event.data;
+            resultCcontrol(receivedData)
+        }
+    });
+}
+
+
+
 const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, increaseQueNum, createQueStick, activateQueStick, active1stQue);
 const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion, startTimer, activateMoveButtons, initSubmit);
 const answerJsonComposer = composer(disableQueBox, generateAnswerJson, startResultPageConnection);
+
+const pushQuestionsResult = composer(pushSingleQue, pushSingleQueData, pushOptionsDisabled, increaseQueNum, createQueStick, activateQueStick, active1stQue);
+const resultCcontrol = composer(setQuizName, loopThroughResultQuestion, activateMoveButtons)
+

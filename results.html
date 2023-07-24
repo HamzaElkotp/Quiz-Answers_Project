@@ -11,17 +11,56 @@
     <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/all.min.css'>
 </head>
 <body>
+
+    <div class="contentBox">
+        <div class="smallNav section is-flex is-justify-content-space-between is-align-items-center">
+            <h1 class="is-size-55 has-text-weight-medium" id="quizName"></h1>
+            <a href="/" class="arrow"><i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+
+        <div class="section quizBox">
+            <div class="columns is-multiline">
+
+                <div class="column is-2 sticksSideBar" id="sticksBox">
+                    <div class="burgerIcon">
+                        <i class="fas fa-stream" id="showHideSideBar"></i>
+                    </div>
+                    <div class="sticksSideBarContent" id="sticksContainer">
+                        
+                    </div>
+                </div>
+                
+                <div class="column quizData" id="quizDataContentBox">
+                    <div class="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center">
+                        <span class="tag is-prpl is-small"><span id="gettedPoint" class="point"></span> of <span id="allPoint" class="point"></span> degree</span>
+                        <span class="percenta">You've Answered <sup><span class="is-prpl answerdNum" id="trueAnswed"></span></sup>/<sub><span class="is-prpl questionNum" id="allQues"></span></sub> Correctly (<span id="percent" class="is-prpl"></span>)</span>
+                        <span class="has-text-weight-medium is-size-4"><span class="queue" id="nowQueNum">1</span>/<span class="maxera" id="maxQueNum"></span></span>
+                    </div>
+
+                    <div class="allQuestionsBox" id="questionContainer">
+
+                    </div>
+
+                    <div class="is-flex is-justify-content-space-between controler buttonato">
+                        <button class="button is-prpl prev" id="previousBtn" disabled="true"><i class="fa-solid fa-chevron-left"></i> Previous Question</button>
+                        <button class="button is-prpl next" id="nextBtn">Next Question <i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="is-flex is-align-items-center is-justify-content-space-between flexBox">
+            <p class="is-size-6 has-text-weight-medium">Made By <a href="https://github.com/HamzaElkotp" class="has-text-purple has-text-weight-semibold is-size-55">Hamza Elkotb</a></p>
+            <p class="is-size-55 has-text-weight-medium"><span class="date"></span>&copy; Under <a href="https://github.com/HamzaElkotp/Quiz-Answers_Project/blob/main/LICENSE" class="has-text-purple has-text-weight-semibold">MIT</a> License</p>
+            <p class="button is-small is-prpl donate" role="button" id="donate">Donate Me</p>
+        </div>
+    </footer>
     
 </body>
 </html>
 
 <script src="/assets/javascript/quizScript.js"></script>
 <script src="/assets/javascript/resultsInit.js"></script>
-<!-- <script>
-    window.addEventListener('message', function (event) {
-        if (event.origin === window.location.origin) {
-            var receivedData = event.data;
-            console.log(receivedData)
-        }
-    });
-</script> -->
