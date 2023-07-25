@@ -534,3 +534,47 @@ img {
 .questionNum, .answerdNum {
     font-size: 22px;
 }
+
+
+
+
+
+label.true{
+    color: var(--iPurple80);
+}
+
+label.true.checked{
+    background-color: var(--iPurple03);
+}
+label.true.checked::after{
+    transition: 0.5s;
+    content: 'Your answer is true';
+    position: absolute;
+    top: -22px;
+    left: 16px;
+    opacity: 0;
+    color: var(--iPurple50);
+}
+label.true.checked:hover::after {
+    opacity: 1;
+}
+
+label.false{
+    color: var(--gray10);
+}
+
+label.false.checked{
+    background-color: #ff5a5a;
+}
+label.false.checked::after{
+    transition: 0.5s;
+    content: 'Your answer is false';
+    position: absolute;
+    top: -22px;
+    left: 16px;
+    opacity: 0;
+    color: #ff5a5a;
+}
+label.false.checked:hover::after {
+    opacity: 1;
+}

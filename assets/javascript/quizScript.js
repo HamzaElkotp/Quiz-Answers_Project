@@ -187,7 +187,7 @@ const pushOptions = function (dataArr) {
     return dataArr
 }
 
-const pushOptionsDisabled = function (dataArr) { // same as pushOptions() but for just result
+const pushOptionsDisabledWithCheck = function (dataArr) { // same as pushOptions() but for just result
     let queData = dataArr[0];
     let queParent = dataArr[1];
 
@@ -206,6 +206,16 @@ const pushOptionsDisabled = function (dataArr) { // same as pushOptions() but fo
         radio.name = `que${optionBoxNum}`;
         radio.setAttribute('inx', indx);
         radio.disabled = true;
+
+        if(indx == queData["userAnswer"] && indx == queData["trueAnswer"]){ // if this is the user answer and it is true
+            label.classList.add("true", "checked");
+        }else if(indx == queData["userAnswer"]){ // if this is the user answer and not true
+            label.classList.add("false", "checked");
+        }else if(indx == queData["trueAnswer"]){ // if this is the ture answer and not the user
+            label.classList.add("true");
+        }
+        // if this is not true answer and not choosed nothing will happen
+
 
         label.append(radio);
         label.append(document.createTextNode(option["optionValue"]));
@@ -509,5 +519,5 @@ const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, in
 const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion, startTimer, activateMoveButtons, initSubmit);
 const answerJsonComposer = composer(disableQueBox, generateAnswerJson, startResultPageConnection);
 
-const pushQuestionsResult = composer(pushSingleQueToRes, increseTrueAnswdNum, pushSingleQueData, pushOptionsDisabled, increaseQueNumToRes, createQueStick, calcPercent, activateQueStick, active1stQue);
+const pushQuestionsResult = composer(pushSingleQueToRes, increseTrueAnswdNum, pushSingleQueData, pushOptionsDisabledWithCheck, increaseQueNumToRes, createQueStick, calcPercent, activateQueStick, active1stQue);
 const resultCcontrol = composer(setQuizName, loopThroughResultQuestion, activateMoveButtons);
