@@ -295,12 +295,15 @@ const activateQueStick = function (dataArr) {
 
 
 // set events
-const active1stQue = function (data) {
+const active1stQue = function (data) { // works in both
     let firstStick = document.querySelector(".quistion");
     let firstQue = document.querySelector(".questionHolder");
     firstStick.classList.add("active");
     firstQue.classList.remove("hide");
     point.textContent = firstQue.getAttribute("degree");
+    if(gettedPoint){
+        gettedPoint.textContent = updateGettedPoint(firstQue);
+    }
     return data
 }
 const calcPercent = function (data){
