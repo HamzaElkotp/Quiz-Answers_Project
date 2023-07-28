@@ -39,6 +39,8 @@ const submitBtn = document.getElementById("submitBtn");
 const dangerAudio = document.getElementById("dangerAudio");
 const verydangerAudio = document.getElementById("verydangerAudio");
 
+let handler = null;
+
 let minQueId = 0;
 let currQueId = 0;
 let maxQueId = null;
@@ -363,7 +365,7 @@ const startTimer = function (data) {
 
     let minuts = timer[0];
     let seconds = timer[1];
-    let handler = setInterval(descrease, 900);
+    handler = setInterval(descrease, 900);
     function descrease() {
         if ((minuts == "00" && seconds <= "59" && seconds >= "31") || (minuts == "01" && seconds <= "00")) {
             settCounterWanr();
@@ -390,6 +392,11 @@ const startTimer = function (data) {
         }
     }
 
+    return data
+}
+
+const stopTimer = function (data){
+    clearInterval(handler);
     return data
 }
 
@@ -517,7 +524,7 @@ const generateConnectionWithQuiz= function(){
 
 const pushQuestions = composer(pushSingleQue, pushSingleQueData, pushOptions, increaseQueNum, createQueStick, activateQueStick, active1stQue);
 const initQuiz = composer(fetchQuiz, setQuizName, setTimer, loopThroughQuestion, startTimer, activateMoveButtons, initSubmit);
-const answerJsonComposer = composer(disableQueBox, generateAnswerJson, startResultPageConnection);
+const answerJsonComposer = composer(stopTimer, disableQueBox, generateAnswerJson, startResultPageConnection);
 
 const pushQuestionsResult = composer(pushSingleQueToRes, increseTrueAnswdNum, pushSingleQueData, pushOptionsDisabledWithCheck, increaseQueNumToRes, createQueStick, calcPercent, activateQueStick, active1stQue);
 const resultCcontrol = composer(setQuizName, loopThroughResultQuestion, activateMoveButtons);

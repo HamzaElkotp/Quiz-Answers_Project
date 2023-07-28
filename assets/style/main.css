@@ -545,6 +545,7 @@ label.true{
 
 label.true.checked{
     background-color: var(--iPurple03);
+    border-radius: 5px;
 }
 label.true.checked::after{
     transition: 0.5s;
@@ -565,6 +566,7 @@ label.false{
 
 label.false.checked{
     background-color: #ff5a5a;
+    border-radius: 5px;
 }
 label.false.checked::after{
     transition: 0.5s;
